@@ -55,4 +55,3 @@ class Player:
         # Chama o método draw da instância de Gun
         self.gun.draw(self.screen)
         self.fire_rate_final_time = time()
-        print(self.fire_rate_final_time - self.fire_rate_initial_time)

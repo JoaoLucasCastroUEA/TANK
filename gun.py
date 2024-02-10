@@ -38,6 +38,7 @@ class Gun(pygame.sprite.Sprite):
         look_direction = pygame.math.Vector2(mouse_pos[0] - self.player.rect.centerx,
                                              mouse_pos[1] - self.player.rect.centery)
 
+
         if not look_direction.length_squared() == 0:
             look_direction.normalize()
 
@@ -53,7 +54,6 @@ class Gun(pygame.sprite.Sprite):
     def fire_bullet(self):
         bullet = Bullet(self.rect.x, self.rect.y, self.angle)
         self.bullets.add(bullet)
-        print(self.bullets)
 
 
 
