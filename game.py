@@ -13,6 +13,9 @@ class Game:
 
         self.player = Player(self.screen)
 
+        # Groups
+        self.bullet_group = pygame.sprite.Group()
+
     def start_game(self):
         while True:
             for event in pygame.event.get():
@@ -20,11 +23,16 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.fill((0, 0, 0))  # Fill the screen with white color
-            self.player.take_commands()
+            self.screen.fill((255, 255, 255))  # Fill the screen with white color
+            self.player.player_commands()
+
+            # draw groupss
             self.player.draw()
+            self.bullet_group.update()
+            self.bullet_group.draw(self.screen)
 
             pygame.display.flip()
+
 
 if __name__ == "__main__":
     game = Game()

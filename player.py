@@ -1,5 +1,6 @@
 import pygame
 from gun import Gun
+from time import time
 
 class Player:
     def __init__(self, screen):
@@ -11,15 +12,17 @@ class Player:
 
         # Cria uma instância da classe Gun
         self.gun = Gun(self)
+        self.fire_rate = 0.1
+        self.fire_rate_initial_time = time()
+        self.fire_rate_final_time = time()
 
-    def draw(self):
-        pygame.draw.rect(self.screen, self.color, self.rect)
-        # Chama o método draw da instância de Gun
-        self.gun.draw(self.screen)
+    def shoot(self):
+        
+        pass
 
-    def take_commands(self):
+    def player_commands(self):
         keys = pygame.key.get_pressed()
-
+        mouse = pygame.mouse.get_pressed()
         dx = 0
         dy = 0
 
@@ -40,5 +43,16 @@ class Player:
         self.rect.x += dx
         self.rect.y += dy
 
+        if mouse[0]:
+            if self.fire_rate_final_time - self.fire_rate_initial_time > self.fire_rate:
+                self.gun.fire_bullet()
+                self.fire_rate_initial_time = time()
+    def draw(self):
+        pygame.draw.rect(self.screen, self.color, self.rect)
         # Chama o método update da instância de Gun
         self.gun.update()
+
+        # Chama o método draw da instância de Gun
+        self.gun.draw(self.screen)
+        self.fire_rate_final_time = time()
+        print(self.fire_rate_final_time - self.fire_rate_initial_time)
