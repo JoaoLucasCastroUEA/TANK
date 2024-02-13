@@ -3,7 +3,7 @@ import math
 from bullet import Bullet
 
 class Gun(pygame.sprite.Sprite):
-    def __init__(self, player,obstacles, joystick):
+    def __init__(self, player,obstacles, joystick,bullet_color):
         super().__init__()
 
         self.player = player
@@ -14,6 +14,7 @@ class Gun(pygame.sprite.Sprite):
         self.joystick = joystick
         self.analog_x = self.joystick.get_axis(2)
         self.analog_y = self.joystick.get_axis(3)
+        self.bullet_color = bullet_color
 
         # Load the image with transparency
         self.original_image = pygame.image.load(
@@ -27,7 +28,6 @@ class Gun(pygame.sprite.Sprite):
 
 
         self.angle = 0
-        self.bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles)
         self.bullets = pygame.sprite.Group()
 
 
@@ -60,7 +60,7 @@ class Gun(pygame.sprite.Sprite):
         self.bullets.update()
 
     def fire_bullet(self):
-        bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles)
+        bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles,self.bullet_color)
         self.bullets.add(bullet)
 
     def get_angle(self):
