@@ -3,7 +3,7 @@ import math
 from bullet import Bullet
 
 class Gun(pygame.sprite.Sprite):
-    def __init__(self, player,obstacles):
+    def __init__(self, player,obstacles, joystick):
         super().__init__()
 
         self.player = player
@@ -11,6 +11,9 @@ class Gun(pygame.sprite.Sprite):
         self.orbit_height = -30
         self.orbit_speed = 0.02
         self.rotation_speed = 5
+        self.joystick = joystick
+        self.analog_x = self.joystick.get_axis(2)
+        self.analog_y = self.joystick.get_axis(3)
 
         # Load the image with transparency
         self.original_image = pygame.image.load(
@@ -29,6 +32,12 @@ class Gun(pygame.sprite.Sprite):
 
 
     def update(self):
+        if abs(self.joystick.get_axis(2)) > 0.1:
+            self.analog_x = self.joystick.get_axis(2)
+        if abs(self.joystick.get_axis(3)) > 0.1:
+            self.analog_y = self.joystick.get_axis(3)
+
+
         self.angle += self.orbit_speed
         self.angle %= 2 * math.pi
 
@@ -43,9 +52,7 @@ class Gun(pygame.sprite.Sprite):
         if not look_direction.length_squared() == 0:
             look_direction.normalize()
 
-            angle = math.degrees(math.atan2(look_direction.y, look_direction.x))
-            if look_direction.x < 0:
-                angle = 360 + angle
+            angle = self.get_angle()
 
             self.angle = math.radians(angle)
             rotated_image = pygame.transform.rotate(self.original_image, -angle)
@@ -56,7 +63,9 @@ class Gun(pygame.sprite.Sprite):
         bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles)
         self.bullets.add(bullet)
 
-
+    def get_angle(self):
+        angle = math.degrees(math.atan2(self.analog_y, self.analog_x))
+        return angle if angle >= 0 else 360 + angle
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)

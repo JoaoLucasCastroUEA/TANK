@@ -18,7 +18,9 @@ class Game:
         self.create_maze()
 
         #Players
-        self.player = Player(self.screen, self.maze.walls)
+        pygame.joystick.init()
+
+        self.player = Player(self.screen, self.maze.walls,pygame.joystick.Joystick(0))
 
         # Groups
         self.bullet_group = pygame.sprite.Group()
