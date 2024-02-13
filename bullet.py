@@ -16,7 +16,7 @@ class Bullet(pygame.sprite.Sprite):
         self.obstacles = obstacles
         self.move_x = math.cos(self.angle)
         self.move_y = math.sin(self.angle)
-        self.max_hits = 10
+        self.max_hits = 5
         self.hits = 0
 
         self.colision_initial_time = time()
@@ -36,7 +36,7 @@ class Bullet(pygame.sprite.Sprite):
 
         if self.rect.x < 0 or self.rect.x > 1280 or self.rect.y < 0 or self.rect.y > 720:
             self.kill()
-        if self.hits > self.max_hits:
+        if self.hits >= self.max_hits:
             self.kill()
 
 
@@ -66,11 +66,14 @@ class Bullet(pygame.sprite.Sprite):
 
                         if self.move_y > 0:
                             self.move_y *= -1
+                            self.move_x *= -1
                             self.colision_initial_time = time()
 
 
                         else:
                             self.move_y *= -1
+                            self.move_x *= -1
+
                             self.colision_initial_time = time()
 
                         self.hits += 1
