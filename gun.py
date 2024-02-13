@@ -3,7 +3,7 @@ import math
 from bullet import Bullet
 
 class Gun(pygame.sprite.Sprite):
-    def __init__(self, player):
+    def __init__(self, player,obstacles):
         super().__init__()
 
         self.player = player
@@ -20,11 +20,12 @@ class Gun(pygame.sprite.Sprite):
 
         self.image = self.original_image.copy()
         self.rect = self.image.get_rect()
+        self.obstacles = obstacles
+
 
         self.angle = 0
-        self.bullet = Bullet(self.rect.x, self.rect.y, self.angle)
+        self.bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles)
         self.bullets = pygame.sprite.Group()
-
 
 
     def update(self):
@@ -52,14 +53,13 @@ class Gun(pygame.sprite.Sprite):
         self.bullets.update()
 
     def fire_bullet(self):
-        bullet = Bullet(self.rect.x, self.rect.y, self.angle)
+        bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles)
         self.bullets.add(bullet)
 
 
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
-        self.bullet.update()
         self.bullets.draw(screen)
 
 

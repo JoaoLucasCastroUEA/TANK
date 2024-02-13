@@ -1,6 +1,10 @@
+import random
+
 import pygame
 import sys
 from player import Player
+from maze import Maze
+from maze_list import MAZE_LIST
 
 class Game:
     def __init__(self):
@@ -10,11 +14,16 @@ class Game:
         self.height = 720
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("My Game")
+        # Maze
+        self.create_maze()
 
-        self.player = Player(self.screen)
+        #Players
+        self.player = Player(self.screen, self.maze.walls)
 
         # Groups
         self.bullet_group = pygame.sprite.Group()
+
+
 
     def start_game(self):
         while True:
@@ -30,8 +39,11 @@ class Game:
             self.player.draw()
             self.bullet_group.update()
             self.bullet_group.draw(self.screen)
+            self.maze.draw(self.screen)
 
             pygame.display.flip()
+    def create_maze(self):
+        self.maze = Maze(random.choice(MAZE_LIST))
 
 
 if __name__ == "__main__":
