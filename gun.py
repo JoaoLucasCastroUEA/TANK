@@ -57,6 +57,8 @@ class Gun(pygame.sprite.Sprite):
             self.angle = math.radians(angle)
             rotated_image = pygame.transform.rotate(self.original_image, -angle)
             self.image = rotated_image.convert_alpha()
+
+        self.collider_bullets()
         self.bullets.update()
 
     def fire_bullet(self):
@@ -70,5 +72,21 @@ class Gun(pygame.sprite.Sprite):
     def draw(self, screen):
         screen.blit(self.image, self.rect)
         self.bullets.draw(screen)
+        print(len(self.bullets))
+    def collider_bullets(self):
+        collision = pygame.sprite.groupcollide(self.bullets,self.obstacles, False, False)
+        for bullet in collision:
+            bullet.handle_colision('horizontal')
+            bullet.handle_move_x()
+        collision = pygame.sprite.groupcollide(self.bullets,self.obstacles, False, False)
+        for bullet in collision:
+            bullet.handle_colision('vertical')
+            bullet.handle_move_y()
+
+
+
+
+
+
 
 

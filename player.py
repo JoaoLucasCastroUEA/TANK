@@ -23,7 +23,7 @@ class Player:
 
         # Cria uma instância da classe Gun
         self.gun = Gun(self,self.obstacles, self.joystick,self.bullet_color)
-        self.fire_rate = 0.5
+        self.fire_rate = 0.1
         self.fire_rate_initial_time = time()
         self.fire_rate_final_time = time()
 
