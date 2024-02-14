@@ -7,8 +7,8 @@ class Gun(pygame.sprite.Sprite):
         super().__init__()
 
         self.player = player
-        self.orbit_radius = 70
-        self.orbit_height = -30
+        self.orbit_radius = 35
+        self.orbit_height = 0
         self.orbit_speed = 0.02
         self.rotation_speed = 5
         self.joystick = joystick
@@ -41,8 +41,8 @@ class Gun(pygame.sprite.Sprite):
         self.angle += self.orbit_speed
         self.angle %= 2 * math.pi
 
-        self.rect.x = self.player.rect.x + self.orbit_radius * math.cos(self.angle) + 20
-        self.rect.y = self.player.rect.y + self.orbit_radius * math.sin(self.angle) + self.orbit_height + 50
+        self.rect.x = self.player.rect.x + self.orbit_radius * math.cos(self.angle)
+        self.rect.y = self.player.rect.y + self.orbit_radius * math.sin(self.angle) + self.orbit_height
 
         mouse_pos = pygame.mouse.get_pos()
         look_direction = pygame.math.Vector2(mouse_pos[0] - self.player.rect.centerx,
@@ -60,7 +60,7 @@ class Gun(pygame.sprite.Sprite):
         self.bullets.update()
 
     def fire_bullet(self):
-        bullet = Bullet(self.rect.x, self.rect.y, self.angle,self.obstacles,self.bullet_color)
+        bullet = Bullet(self.rect.centerx, self.rect.centery, self.angle,self.obstacles,self.bullet_color)
         self.bullets.add(bullet)
 
     def get_angle(self):

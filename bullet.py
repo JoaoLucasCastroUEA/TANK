@@ -20,14 +20,10 @@ class Bullet(pygame.sprite.Sprite):
 
         self.colision_initial_time = time()
         self.colision_final_time = time()
-        self.time_to_live_initial = time()
-        self.time_to_live_final = time()
-        self.time_to_live = 2.5
 
 
     def update(self):
         self.colision_final_time = time()
-        self.time_to_live_final = time()
 
         self.rect.x += self.speed * self.move_x
         self.collision('horizontal')
@@ -36,7 +32,7 @@ class Bullet(pygame.sprite.Sprite):
 
         if not self.rect.colliderect(pygame.Rect(0, 0, 1280, 720)):
             self.kill()
-        if self.time_to_live_final - self.time_to_live_initial > self.time_to_live:
+        if self.hits >= 6:
             self.kill()
 
     def collision(self, direction):

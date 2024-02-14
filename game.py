@@ -20,6 +20,7 @@ class Game:
         self.create_maze()
         self.create_upgrade()
 
+        self.clock = pygame.time.Clock()
 
         # Bullet colors
         self.bullet_colors = [(0, 0, 255), (0, 255, 0)]
@@ -39,6 +40,8 @@ class Game:
 
     def start_game(self):
         while True:
+            fps = self.clock.get_fps()
+            print(f"FPS: {fps}")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -72,6 +75,7 @@ class Game:
             self.upgrade.draw(self.screen)
 
             pygame.display.flip()
+            self.clock.tick(1000)  # Assuming 60 FPS
 
     def create_maze(self):
         self.maze = Maze(MAZE_LIST[0])
