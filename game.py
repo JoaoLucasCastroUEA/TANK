@@ -60,7 +60,13 @@ class Game:
                             player.player_life -= 1
                             print(f"Player {other_player.player_id} life = {other_player.player_life}")
 
-
+                for other_player in self.players:
+                    if other_player.player_id != player.player_id and player.player_life > 0:
+                        # Player-to-Player Bullet Collision
+                        collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True, True)
+                        for bullet in collisions:
+                            print(
+                                f"Bullet collision between Player {player.player_id} and Player {other_player.player_id}!")
 
             self.maze.draw(self.screen)
             self.upgrade.draw(self.screen)
