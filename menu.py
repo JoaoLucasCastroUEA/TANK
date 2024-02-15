@@ -1,32 +1,32 @@
 class Menu:
     def __init__(self):
-        self.opcoes = ["Play", "Créditos"]
+        self.options = ["Play", "Credits"]
     
-    def exibir_menu(self):
+    def show_menu(self):
         print("=== MENU ===")
-        for i, opcao in enumerate(self.opcoes, start=1):
-            print(f"{i}. {opcao}")
+        for i, option in enumerate(self.options, start=1):
+            print(f"{i}. {option}")
     
-    def escolher_opcao(self):
-        opcao = input("Escolha uma opção: ")
-        return int(opcao) - 1
+    def choose_option(self):
+        option = input("Choose an option: ")
+        return int(option) - 1
     
-    def exibir_creditos(self):
-        print("=== CRÉDITOS ===")
-        print("Equipe:")
+    def show_credits(self):
+        print("=== CREDITS ===")
+        print("Team:")
         print("- João Lucas Noronha")
         print("- Juliana Ballin Lima")
         print("- Renato Barbosa")
 
-    def iniciar(self):
+    def start(self):
         while True:
-            self.exibir_menu()
-            escolha = self.escolher_opcao()
+            self.show_menu()
+            choice = self.choose_option()
 
-            if escolha == 0:
-                print("Iniciando o jogo...")
-                # Iniciar o jogo
-            elif escolha == 1:
-                self.exibir_creditos()
+            if choice == 0:
+                print("Starting the game...")
+                # Start the game
+            elif choice == 1:
+                self.show_credits()
             else:
-                print("Opção inválida. Escolha novamente.")
+                print("Invalid option. Please choose again.")
