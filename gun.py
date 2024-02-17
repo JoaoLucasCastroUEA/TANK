@@ -18,7 +18,8 @@ class Gun(pygame.sprite.Sprite):
 
         # Load the image with transparency
         self.original_image = pygame.image.load(
-            "C:\\Users\\joaoj\\OneDrive\\Documentos\\GitHub\\TANK\\Sprites\\Arma.png").convert_alpha()
+            r"C:\Users\joaoj\OneDrive\Documentos\GitHub\TANK_pygame\Sprites\img_gun.png"
+        ).convert_alpha()
         self.original_image = pygame.transform.scale(self.original_image, (24, 24))
         self.original_image.set_colorkey((255, 0, 255))  # Set the transparent color (use the color of your background)
 
@@ -72,7 +73,6 @@ class Gun(pygame.sprite.Sprite):
     def draw(self, screen):
         screen.blit(self.image, self.rect)
         self.bullets.draw(screen)
-        print(len(self.bullets))
     def collider_bullets(self):
         collision = pygame.sprite.groupcollide(self.bullets,self.obstacles, False, False)
         for bullet in collision:
