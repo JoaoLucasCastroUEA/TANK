@@ -3,7 +3,9 @@ from time import time
 from gun import Gun  # Importando a classe Gun do arquivo gun.py no diretório especificado
 
 class Player:
-    def __init__(self, screen, obstacles, joystic, color, player_id):
+    def __init__(self, screen, obstacles, color, player_id):
+        #def __init__(self, screen, obstacles, joystic, color, player_id):
+
         self.screen = screen
         self.width = 35
         self.height = 35
@@ -18,11 +20,9 @@ class Player:
         self.player_life = 10
         self.player_speed = 1
 
-        self.joystick = joystic
-        self.joystick.init()
 
-        # Cria uma instância da classe Gun do arquivo gun.py no diretório especificado
-        self.gun = Gun(self, self.obstacles, self.joystick, self.bullet_color)
+        # Cria uma instância da classe Gun
+        self.gun = Gun(self,self.obstacles, self.joystick,self.bullet_color)
         self.fire_rate = 0.5
         self.fire_rate_initial_time = time()
         self.fire_rate_final_time = time()
@@ -51,7 +51,6 @@ class Player:
 
     def shoot(self):
         if self.fire_rate_final_time - self.fire_rate_initial_time > self.fire_rate:
-            self.gun.fire_bullet()
             self.fire_rate_initial_time = time()
 
     def Upgrade(self,upgradeID, upgrades):
@@ -65,18 +64,25 @@ class Player:
         self.dx = 0
         self.dy = 0
 
+        self.upgrade_collision(upgradeID,upgrades)
 
-        self.analaog_x = self.joystick.get_axis(0)
-        self.dx = self.analaog_x
-        self.rect.x += self.dx * self.player_speed
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_w]:
+            self.dy = -1
+        if keys[pygame.K_s]:
+            self.dy = 1
+
+        if keys[pygame.K_d]:
+            self.dx = 1
+        if keys[pygame.K_a]:
+            self.dx = -1
+
+        self.rect.x += self.player_speed * self.dx
         self.wall_collisions('horizontal')
 
-        self.analaog_y = self.joystick.get_axis(1)
-        self.dy = self.analaog_y
-        self.rect.y += self.dy * self.player_speed
+        self.rect.y += self.player_speed * self.dy
         self.wall_collisions('vertical')
-
-        self.upgrade_collision(upgradeID,upgrades)
 
 
         # Normalizar o vetor de movimento na diagonal
@@ -85,8 +91,6 @@ class Player:
             self.dy /= 1.414
 
 
-        if self.joystick.get_axis(5) > -1:
-            self.shoot()
 
     def wall_collisions(self, direction):
         if direction == 'horizontal':
@@ -131,8 +135,6 @@ class Player:
         if self.player_life > 0:
             self.screen.blit(self.image, self.rect)
             # Chama o método update da instância de Gun
-            self.gun.update()
 
             # Chama o método draw da instância de Gun
-            self.gun.draw(self.screen)
             self.fire_rate_final_time = time()
