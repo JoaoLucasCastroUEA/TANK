@@ -1,6 +1,7 @@
 import pygame
 import os
 from credits import Credits
+from game import Game  # Importe a classe Game
 
 class Menu:
     def __init__(self):
@@ -36,7 +37,7 @@ class Menu:
 
     def start(self):
         pygame.init()
-        pygame.display.set_caption('Menu')
+        pygame.display.set_caption('Mazer Kombat')
         
         running = True
         while running:
@@ -45,8 +46,10 @@ class Menu:
 
             if choice == "play":
                 print("Starting the game...")
-                # Aqui você deve iniciar o jogo
+                game = Game()  # Remove a passagem de self.screen como argumento
+                game.start_game()  # Inicia o jogo
+
+
             elif choice == "credits":
                 credits = Credits(self.screen, self.width, self.height)
                 credits.show_credits()
-
