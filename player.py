@@ -1,6 +1,6 @@
 import pygame
-from gun import Gun
 from time import time
+from gun import Gun  # Importando a classe Gun do arquivo gun.py no diretório especificado
 
 class Player:
     def __init__(self, screen, obstacles, joystic, color, player_id):
@@ -21,8 +21,8 @@ class Player:
         self.joystick = joystic
         self.joystick.init()
 
-        # Cria uma instância da classe Gun
-        self.gun = Gun(self,self.obstacles, self.joystick,self.bullet_color)
+        # Cria uma instância da classe Gun do arquivo gun.py no diretório especificado
+        self.gun = Gun(self, self.obstacles, self.joystick, self.bullet_color)
         self.fire_rate = 0.5
         self.fire_rate_initial_time = time()
         self.fire_rate_final_time = time()
@@ -37,6 +37,16 @@ class Player:
         if pygame.joystick.get_count() == 0:
             print("Nenhum controle detectado.")
 
+        # Lista de imagens dos jogadores
+        self.player_images = ["img_player1.png", "img_player2.png", "img_player3.png", "img_player4.png"]
+
+        # Atribui a imagem correspondente ao jogador
+        if 0 <= player_id - 1 < len(self.player_images):
+            self.image = pygame.image.load(self.player_images[player_id - 1]).convert_alpha()
+        else:
+            # Se o jogador_id for inválido, carrega uma imagem padrão
+            self.image = pygame.Surface((self.width, self.height))
+            self.image.fill(self.color)
 
 
     def shoot(self):
@@ -117,16 +127,12 @@ class Player:
             self.player_speed = 2
             self.has_upgrade = True
 
-
-
-
     def draw(self):
         if self.player_life > 0:
-            pygame.draw.rect(self.screen, self.color, self.rect)
+            self.screen.blit(self.image, self.rect)
             # Chama o método update da instância de Gun
             self.gun.update()
 
             # Chama o método draw da instância de Gun
             self.gun.draw(self.screen)
             self.fire_rate_final_time = time()
-

@@ -1,6 +1,5 @@
 import pygame
 import sys
-from player import Player
 from maze import Maze
 from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
@@ -11,8 +10,8 @@ class Game:
         
         self.width = 1280
         self.height = 720
-        self.screen = pygame.display.set_mode((self.width, self.height))  # Criar a tela aqui
-        pygame.display.set_caption("My Game")
+        self.screen = pygame.display.set_mode((self.width, self.height))  
+        pygame.display.set_caption("Maze Kombat")
 
         # Maze
         self.create_maze()
@@ -22,6 +21,9 @@ class Game:
 
         # Bullet colors
         self.bullet_colors = [(0, 0, 255), (0, 255, 0)]
+
+        # Load the background image
+        self.bg_image = pygame.image.load("C:\\Users\\JuhBa\\Documents\\GitHub\\TANK_ProjetoFinal\\Sprites\\img_bg_game.png").convert()
 
         # Players
         pygame.joystick.init()
@@ -37,6 +39,8 @@ class Game:
             self.players.extend([self.player1, self.player2])
 
     def start_game(self):
+        from player import Player  # Importa a classe Player dentro do método start_game()
+
         while True:
             fps = self.clock.get_fps()
             print(f"FPS: {fps}")
@@ -45,7 +49,9 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.fill((255, 255, 255))
+            # Draw the background image
+            self.screen.blit(self.bg_image, (0, 0))
+
             if len(self.upgrade.upgrade_block) == 0:
                 self.create_upgrade()
             for player in self.players:
