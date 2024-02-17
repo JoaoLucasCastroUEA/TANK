@@ -6,25 +6,22 @@ class Credits:
         self.screen = screen
         self.width = width
         self.height = height
-        self.bg_image = pygame.image.load(os.path.join("Sprites", "img_bg_creditos.png")).convert()
-        self.return_button = pygame.image.load(os.path.join("Sprites", "img_return_creditos.png")).convert_alpha()
+        self.bg_image = pygame.image.load(os.path.join("Sprites", "img_bg_credits.png")).convert()
+        self.return_button = pygame.image.load(os.path.join("Sprites", "img_return_credits.png")).convert_alpha()
 
-        # Informações dos integrantes
+        # Members information
         self.members_info = [
-            ("Coordenador", "Profº Jucimar Maia da Silva"),
+            ("Coordinator", "Profº Jucimar Maia da Silva"),
             ("", ""),
             ("Team", "- João Lucas Noronha"),
             ("", "- Juliana Ballin Lima"),
             ("", "- Renato Barbosa")
         ]
 
-        # Fonte e tamanho do texto
+        # Text settings
         self.font = pygame.font.Font(None, 36)
-        # Cor do texto
         self.text_color = (255, 255, 255)
-        # Espaçamento entre as linhas do texto
         self.line_spacing = 40
-        # Posição inicial para desenhar o texto
         self.text_position = (self.width // 2, 300)
 
     def show_credits(self):
@@ -32,7 +29,7 @@ class Credits:
         while running:
             self.screen.blit(self.bg_image, (0, 0))
             
-            # Desenha os créditos dos integrantes
+            # Draw members' credits
             for i, (title, name) in enumerate(self.members_info):
                 text = self.font.render(f"{title}", True, self.text_color)
                 text_rect = text.get_rect(center=(self.width // 2, self.text_position[1] + i * self.line_spacing))
@@ -42,7 +39,7 @@ class Credits:
                 text_rect = text.get_rect(center=(self.width // 2, text_rect.bottom + 20))
                 self.screen.blit(text, text_rect)
 
-            # Desenha o botão de retorno
+            # Draw return button
             return_button_rect = self.return_button.get_rect(center=(self.width // 2, 600))
             self.screen.blit(self.return_button, return_button_rect)
 

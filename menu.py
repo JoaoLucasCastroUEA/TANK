@@ -12,7 +12,7 @@ class Menu:
         self.clock = pygame.time.Clock()
         self.bg_image = pygame.image.load(os.path.join("Sprites", "img_bg_menu.png")).convert()
         self.play_button = pygame.image.load(os.path.join("Sprites", "img_play_menu.png")).convert_alpha()
-        self.credit_button = pygame.image.load(os.path.join("Sprites", "img_creditos_menu.png")).convert_alpha()
+        self.credit_button = pygame.image.load(os.path.join("Sprites", "img_credits_menu.png")).convert_alpha()
 
     def show_menu(self):
         self.screen.blit(self.bg_image, (0, 0))
