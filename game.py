@@ -30,9 +30,6 @@ class Game:
 
         self.players = []
 
-        self.player1 = Player(self.screen, self.maze.walls, (0, 255, 0), player_id=1)
-        self.players.append(self.player1)
-
         if pygame.joystick.get_count() == 1:
             self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1)
             self.players.append(self.player1)
@@ -46,6 +43,7 @@ class Game:
 
         while True:
             fps = self.clock.get_fps()
+            print(f"FPS: {fps}")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
