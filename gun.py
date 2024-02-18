@@ -18,7 +18,7 @@ class Gun(pygame.sprite.Sprite):
 
         # Load the image with transparency
         self.original_image = pygame.image.load(
-            "C:\\Users\\JuhBa\\Documents\\GitHub\\TANK_ProjetoFinal\\Sprites\\img_gun.png").convert_alpha()
+            "Sprites/img_gun.png").convert_alpha()
         self.original_image = pygame.transform.scale(self.original_image, (24, 24))
         self.original_image.set_colorkey((255, 0, 255))  # Set the transparent color (use the color of your background)
 
