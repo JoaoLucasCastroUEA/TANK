@@ -38,7 +38,11 @@ class Menu:
     def start(self):
         pygame.init()
         pygame.display.set_caption('Mazer Kombat')
-        
+
+        menu_music_file_path = 'Sounds/Music/menumusic.wav'
+        pygame.mixer.music.load(menu_music_file_path)
+        pygame.mixer.music.play(loops=-1)
+
         running = True
         while running:
             self.show_menu()
