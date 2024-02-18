@@ -3,6 +3,7 @@ import sys
 from maze import Maze
 from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
+from sound_manager import Sound_Manager
 
 class Game:
     def __init__(self):
@@ -23,7 +24,7 @@ class Game:
         self.bullet_colors = [(0, 0, 255), (0, 255, 0)]
 
         # Load the background image
-        self.bg_image = pygame.image.load("C:\\Users\\JuhBa\\Documents\\GitHub\\TANK_ProjetoFinal\\Sprites\\img_bg_game.png").convert()
+        self.bg_image = pygame.image.load("Sprites/img_bg_game.png").convert()
 
         # Players
         pygame.joystick.init()
@@ -40,6 +41,11 @@ class Game:
 
     def start_game(self):
         from player import Player  # Importa a classe Player dentro do método start_game()
+
+        game_music_file_path = 'Sounds/Music/gamemusic.wav' #Música do Jogo
+        pygame.mixer.music.load(game_music_file_path)
+        pygame.mixer.music.play(loops=-1)
+        pygame.mixer.music.set_volume(0.4)
 
         while True:
             fps = self.clock.get_fps()
@@ -86,3 +92,5 @@ class Game:
 
     def create_upgrade(self):
         self.upgrade = Upgrade_Manager(MAZE_LIST[0])
+
+

@@ -15,7 +15,7 @@ class Credits:
             ("", ""),
             ("Team", "- João Lucas Noronha"),
             ("", "- Juliana Ballin Lima"),
-            ("", "- Renato Barbosa")
+            ("", "- Renato Barbosa de Carvalho")
         ]
 
         # Fonte e tamanho do texto

@@ -3,6 +3,8 @@ import os
 from credits import Credits
 from game import Game  # Importe a classe Game
 
+
+
 class Menu:
     def __init__(self):
         self.options = ["Play", "Credits"]
@@ -37,8 +39,12 @@ class Menu:
 
     def start(self):
         pygame.init()
-        pygame.display.set_caption('Mazer Kombat')
-        
+        pygame.display.set_caption('Maze Kombat')
+
+        menu_music_file_path = 'Sounds/Music/menumusic.wav'
+        pygame.mixer.music.load(menu_music_file_path)
+        pygame.mixer.music.play(loops=-1)
+
         running = True
         while running:
             self.show_menu()
@@ -46,6 +52,7 @@ class Menu:
 
             if choice == "play":
                 print("Starting the game...")
+                pygame.mixer.music.stop()
                 game = Game()  # Remove a passagem de self.screen como argumento
                 game.start_game()  # Inicia o jogo
 
