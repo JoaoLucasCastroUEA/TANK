@@ -2,20 +2,12 @@ import pygame
 
 pygame.init()
 pygame.mixer.init()
+
 class Sound_Manager:
+    def __init__(self):
+        self.music_file = 'Sounds/Music/gamemusic.wav'
 
-    def game_music_loop(music_file):
-        pygame.mixer.music.load(music_file)
+    def play_game_music(self):
+        pygame.mixer.music.load(self.music_file)
         pygame.mixer.music.play(loops=-1)
-
-    gamemusic_file_path = 'Sounds/Music/gamemusic.wav'
-
-    game_music_loop(gamemusic_file_path)
-
-    def menu_music_loop(music_file):
-        pygame.mixer.music.load(music_file)
-        pygame.mixer.music.play(loops=-1)
-
-    menumusic_file_path = 'Sounds/Music/menumusic.wav'
-
-    menu_music_loop(menumusic_file_path)
+        pygame.mixer.music.set_volume(0.4)

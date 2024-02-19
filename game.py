@@ -4,15 +4,18 @@ from maze import Maze
 from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
 from player import Player
+from sound_manager import Sound_Manager
+
 
 class Game:
     def __init__(self):
         pygame.init()
-        
+
         self.width = 1280
         self.height = 720
-        self.screen = pygame.display.set_mode((self.width, self.height))  
+        self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Maze Kombat")
+        self.sound_manager = Sound_Manager()
 
         # Maze
         self.create_maze()
@@ -39,15 +42,10 @@ class Game:
             self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2)
             self.players.extend([self.player1, self.player2])
 
-
-
     def start_game(self):
         from player import Player  # Importa a classe Player dentro do método start_game()
 
-        game_music_file_path = 'Sounds/Music/gamemusic.wav'  # Música do Jogo
-        pygame.mixer.music.load(game_music_file_path)
-        pygame.mixer.music.play(loops=-1)
-        pygame.mixer.music.set_volume(0.4)
+        self.sound_manager.play_game_music()
 
         while True:
             fps = self.clock.get_fps()
@@ -78,7 +76,8 @@ class Game:
                 for other_player in self.players:
                     if other_player.player_id != player.player_id and player.player_life > 0:
                         # Player-to-Player Bullet Collision
-                        collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True, True)
+                        collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True,
+                                                                True)
                         for bullet in collisions:
                             print(
                                 f"Bullet collision between Player {player.player_id} and Player {other_player.player_id}!")
