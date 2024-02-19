@@ -76,11 +76,11 @@ class Gun(pygame.sprite.Sprite):
     def collider_bullets(self):
         collision = pygame.sprite.groupcollide(self.bullets,self.obstacles, False, False)
         for bullet in collision:
-            bullet.handle_colision('horizontal')
+            bullet.handle_collision('horizontal')
             bullet.handle_move_x()
         collision = pygame.sprite.groupcollide(self.bullets,self.obstacles, False, False)
         for bullet in collision:
-            bullet.handle_colision('vertical')
+            bullet.handle_collision('vertical')
             bullet.handle_move_y()
 
 

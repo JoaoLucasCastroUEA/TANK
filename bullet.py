@@ -16,6 +16,7 @@ class Bullet(pygame.sprite.Sprite):
         self.max_hits = 10
         self.hits = 0
 
+
     def update(self):
         self.handle_move_x()
         self.handle_move_y()
