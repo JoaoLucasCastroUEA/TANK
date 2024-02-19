@@ -3,6 +3,7 @@ import sys
 from maze import Maze
 from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
+from player import Player
 
 class Game:
     def __init__(self):
