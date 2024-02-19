@@ -5,8 +5,8 @@ from gun import Gun  # Importando a classe Gun do arquivo gun.py no diretório e
 class Player:
     def __init__(self, screen, obstacles, joystic, color, player_id):
         self.screen = screen
-        self.width = 35
-        self.height = 35
+        self.width = 30
+        self.height = 60
         self.color = (255, 0, 0)
         self.rect = pygame.Rect(100, 200, self.width, self.height)
         self.obstacles = obstacles
