@@ -5,7 +5,7 @@ from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
 from player import Player
 from sound_manager import Sound_Manager
-
+import os  # Importamos o módulo os para manipulação de caminhos de arquivos
 
 class Game:
     def __init__(self):
@@ -18,7 +18,7 @@ class Game:
         self.sound_manager = Sound_Manager()
 
         # Maze
-        self.create_maze()
+        self.create_maze(self.width, self.height)  # Passamos a largura e altura da tela aqui
         self.create_upgrade()
 
         self.clock = pygame.time.Clock()
@@ -88,8 +88,8 @@ class Game:
             pygame.display.flip()
             self.clock.tick(1000)  # Assuming 60 FPS
 
-    def create_maze(self):
-        self.maze = Maze(MAZE_LIST[0])
+    def create_maze(self, screen_width, screen_height):  # Adicionamos os argumentos de largura e altura da tela
+        self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)
 
     def create_upgrade(self):
         self.upgrade = Upgrade_Manager(MAZE_LIST[0])
