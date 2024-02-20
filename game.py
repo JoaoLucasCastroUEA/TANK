@@ -5,7 +5,7 @@ from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
 from player import Player
 from sound_manager import Sound_Manager
-import os
+import random
 
 class Game:
     def __init__(self):
@@ -97,8 +97,9 @@ class Game:
                 break
 
     def create_maze(self, screen_width, screen_height):
-        self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)
-
+        # Choose a random maze from MAZE_LIST
+        selected_maze = random.choice(MAZE_LIST)
+        self.maze = Maze(selected_maze, screen_width, screen_height)
     def create_upgrade(self):
         self.upgrade = Upgrade_Manager(MAZE_LIST[0])
 
