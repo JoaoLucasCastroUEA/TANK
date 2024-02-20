@@ -35,12 +35,23 @@ class Game:
         self.players = []
 
         if pygame.joystick.get_count() == 1:
-            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1, x= 100, y =200)
+            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1,
+                                  x=100, y=200)
             self.players.append(self.player1)
         elif pygame.joystick.get_count() == 2:
-            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1,  x= 100, y =200)
-            self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2, x = 1100, y = 200)
+            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1,
+                                  x=100, y=200)
+            self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2,
+                                  x=1100, y=200)
             self.players.extend([self.player1, self.player2])
+        elif pygame.joystick.get_count() == 3:
+            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1,
+                                  x=100, y=200)
+            self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2,
+                                  x=1100, y=200)
+            self.player3 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(2), (255, 0, 0), player_id=3,
+                                  x=640, y=360)
+            self.players.extend([self.player1, self.player2, self.player3])
 
         # Load the victory screen image
         self.victory_image = pygame.image.load("Sprites/img_bg_telavitoria.png").convert()
@@ -68,23 +79,27 @@ class Game:
                 player.draw()
 
                 # Check for collisions between current player's bullets and other players
-                for other_player in self.players:
-                    if other_player.player_id != player.player_id and player.player_life > 0:
-                        collisions = pygame.sprite.spritecollide(player, other_player.gun.bullets, True)
-                        for bullet in collisions:
-                            print(f"Player {player.player_id} hit by Player {other_player.player_id}'s bullet!")
-                            player.player_life -= 1
-                            print(f"Player {other_player.player_id} life = {other_player.player_life}")
+                for player in self.players:
+                    player.Upgrade(self.upgrade, self.upgrade.upgrade_block)
+                    player.draw()
 
-                for other_player in self.players:
-                    if other_player.player_id != player.player_id and player.player_life > 0:
-                        # Player-to-Player Bullet Collision
-                        collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True,
-                                                                True)
-                        for bullet in collisions:
-                            print(
-                                f"Bullet collision between Player {player.player_id} and Player {other_player.player_id}!")
+                    # Check for collisions between current player's bullets and other players
+                    for other_player in self.players:
+                        if other_player.player_id != player.player_id and player.player_life > 0:
+                            collisions = pygame.sprite.spritecollide(player, other_player.gun.bullets, True)
+                            for bullet in collisions:
+                                print(f"Player {player.player_id} hit by Player {other_player.player_id}'s bullet!")
+                                player.player_life -= 1
+                                print(f"Player {other_player.player_id} life = {other_player.player_life}")
 
+                    for other_player in self.players:
+                        if other_player.player_id != player.player_id and player.player_life > 0:
+                            # Player-to-Player Bullet Collision
+                            collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True,
+                                                                    True)
+                            for bullet in collisions:
+                                print(
+                                    f"Bullet collision between Player {player.player_id} and Player {other_player.player_id}!")
             self.maze.draw(self.screen)
             self.upgrade.draw(self.screen)
 

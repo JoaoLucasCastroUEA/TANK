@@ -132,7 +132,7 @@ class Player:
             self.has_upgrade = False
 
         if upgradeID == 'fire rate':
-            self.fire_rate = 0.5
+            self.fire_rate = 0.1
             self.has_upgrade = True
 
         if upgradeID == 'speed':
