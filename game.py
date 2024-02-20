@@ -1,4 +1,3 @@
-#Teste sem bug
 import pygame
 import sys
 from maze import Maze
@@ -6,7 +5,7 @@ from maze_list import MAZE_LIST
 from upgrade_manager import Upgrade_Manager
 from player import Player
 from sound_manager import Sound_Manager
-import os  # Importamos o módulo os para manipulação de caminhos de arquivos
+import os
 
 class Game:
     def __init__(self):
@@ -19,7 +18,7 @@ class Game:
         self.sound_manager = Sound_Manager()
 
         # Maze
-        self.create_maze(self.width, self.height)  # Passamos a largura e altura da tela aqui
+        self.create_maze(self.width, self.height)
         self.create_upgrade()
 
         self.clock = pygame.time.Clock()
@@ -43,8 +42,11 @@ class Game:
             self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2, x = 1100, y = 200)
             self.players.extend([self.player1, self.player2])
 
+        # Load the victory screen image
+        self.victory_image = pygame.image.load("Sprites/img_bg_telavitoria.png").convert()
+
     def start_game(self):
-        from player import Player  # Importa a classe Player dentro do método start_game()
+        from player import Player
 
         self.sound_manager.play_game_music()
 
@@ -56,16 +58,16 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            # Draw the background image
             self.screen.blit(self.bg_image, (0, 0))
 
             if len(self.upgrade.upgrade_block) == 0:
                 self.create_upgrade()
+
             for player in self.players:
                 player.Upgrade(self.upgrade, self.upgrade.upgrade_block)
                 player.draw()
 
-                # Verifica colisões entre as balas do jogador atual e os outros jogadores
+                # Check for collisions between current player's bullets and other players
                 for other_player in self.players:
                     if other_player.player_id != player.player_id and player.player_life > 0:
                         collisions = pygame.sprite.spritecollide(player, other_player.gun.bullets, True)
@@ -86,13 +88,54 @@ class Game:
             self.maze.draw(self.screen)
             self.upgrade.draw(self.screen)
 
-
             pygame.display.flip()
             self.clock.tick(1000)
 
+            # Check if any player's life is zero
+            if any(player.player_life <= 0 for player in self.players):
+                self.display_victory_screen()
+                break
 
-    def create_maze(self, screen_width, screen_height):  # Adicionamos os argumentos de largura e altura da tela
+    def create_maze(self, screen_width, screen_height):
         self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)
 
     def create_upgrade(self):
         self.upgrade = Upgrade_Manager(MAZE_LIST[0])
+
+    def display_victory_screen(self):
+        self.screen.blit(self.victory_image, (0, 0))
+
+        # Get the winning player
+        winning_player = next(player for player in self.players if player.player_life > 0)
+        font = pygame.font.Font(None, 48)
+        text_surface = font.render(f"Parabéns Jogador {winning_player.player_id}", True, (255, 255, 255))
+        text_rect = text_surface.get_rect(center=(self.width // 2, self.height // 2 ))  # Adjusted y position
+        self.screen.blit(text_surface, text_rect)
+
+        # Include a line after the text
+        font = pygame.font.Font(None, 36)
+        line_surface = font.render("Você foi o sobrevivente dessa batalha", True, (255, 255, 255))
+        line_rect = line_surface.get_rect(center=(self.width // 2, text_rect.bottom + 25))  # Adjusted y position
+        self.screen.blit(line_surface, line_rect)
+
+        # Draw menu button
+        menu_button = pygame.image.load("Sprites/img_menu_game.png").convert_alpha()
+        menu_button_rect = menu_button.get_rect(center=(self.width // 2, 540))  # Adjusted y position
+        self.screen.blit(menu_button, menu_button_rect)
+
+        pygame.display.flip()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if menu_button_rect.collidepoint(mouse_pos):
+                        # Go back to the menu
+                        return
+
+if __name__ == "__main__":
+    game = Game()
+    game.start_game()
