@@ -1,6 +1,7 @@
 import pygame
 from time import time
 from gun import Gun  # Importando a classe Gun do arquivo gun.py no diretório especificado
+import os
 
 class Player:
     def __init__(self, screen, obstacles, joystic, color, player_id):
@@ -38,7 +39,15 @@ class Player:
             print("Nenhum controle detectado.")
 
         # Lista de imagens dos jogadores
-        self.player_images = ["img_player1.png", "img_player2.png", "img_player3.png", "img_player4.png"]
+        # Lista de imagens dos jogadores
+        self.player_images = ["Sprites/img_player1.png", "Sprites/img_player2.png", "Sprites/img_player3.png",
+                              "Sprites/img_player4.png"]
+
+        # Obtém o caminho do diretório onde este script está localizado
+        script_directory = os.path.dirname(os.path.abspath(__file__))
+
+        # Muda o diretório de trabalho para o diretório do script
+        os.chdir(script_directory)
 
         # Atribui a imagem correspondente ao jogador
         if 0 <= player_id - 1 < len(self.player_images):
