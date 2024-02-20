@@ -18,6 +18,7 @@ class Game:
         self.sound_manager = Sound_Manager()
 
         # Maze
+        self.selected_maze = random.choice(MAZE_LIST)
         self.create_maze(self.width, self.height)
         self.create_upgrade()
 
@@ -113,8 +114,7 @@ class Game:
 
     def create_maze(self, screen_width, screen_height):
         # Choose a random maze from MAZE_LIST
-        selected_maze = random.choice(MAZE_LIST)
-        self.maze = Maze(selected_maze, screen_width, screen_height)
+        self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)
     def create_upgrade(self):
         self.upgrade = Upgrade_Manager(MAZE_LIST[0])
 
