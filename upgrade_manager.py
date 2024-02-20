@@ -1,6 +1,7 @@
 # upgrade_manager.py
 import pygame
 from random import choice
+from random import randint
 import os
 
 from upgrade import Upgrade
@@ -18,14 +19,13 @@ class Upgrade_Manager:
 
         # Encontre todas as posições vazias no labirinto
         empty_positions = [(x, y) for y, row in enumerate(maze) for x, char in enumerate(row) if char == " "]
-
         if empty_positions:
             # Escolha uma posição aleatória entre as posições vazias
-            x, y = choice(empty_positions)
-
+            x, y = empty_positions[randint(0, len(empty_positions) - 1)]
             # Crie o upgrade nessa posição
             upgrade_img = pygame.image.load(os.path.join(sprite_path, 'img_upgrade.png')).convert_alpha()
             upgrade = Upgrade(x, y, upgrade_img)
+            print(upgrade)
             self.upgrade_ID = choice(self.upgrade_choice)
 
             self.upgrade_block.add(upgrade)

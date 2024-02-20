@@ -86,8 +86,9 @@ class Game:
             self.maze.draw(self.screen)
             self.upgrade.draw(self.screen)
 
+
             pygame.display.flip()
-            self.clock.tick(1000)  # Assuming 60 FPS
+            self.clock.tick(1000)
 
     def create_maze(self, screen_width, screen_height):  # Adicionamos os argumentos de largura e altura da tela
         self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)

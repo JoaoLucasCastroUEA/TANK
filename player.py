@@ -24,7 +24,7 @@ class Player:
 
         # Cria uma instância da classe Gun do arquivo gun.py no diretório especificado
         self.gun = Gun(self, self.obstacles, self.joystick, self.bullet_color)
-        self.fire_rate = 0.5
+        self.fire_rate = 1.5
         self.fire_rate_initial_time = time()
         self.fire_rate_final_time = time()
 
@@ -129,7 +129,7 @@ class Player:
             self.has_upgrade = False
 
         if upgradeID == 'fire rate':
-            self.fire_rate = 0.1
+            self.fire_rate = 0.5
             self.has_upgrade = True
 
         if upgradeID == 'speed':

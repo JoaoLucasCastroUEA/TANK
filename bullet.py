@@ -17,11 +17,11 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.image.load(bullet_img_path).convert_alpha()
         self.rect = self.image.get_rect(center=(x, y))
 
-        self.speed = 1.6
+        self.speed = 1
         self.angle = angle
         self.move_x = math.cos(self.angle)
         self.move_y = math.sin(self.angle)
-        self.max_hits = 10
+        self.max_hits = 7
         self.hits = 0
 
         self.initial_time = time()
