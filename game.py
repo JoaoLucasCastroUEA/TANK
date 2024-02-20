@@ -58,8 +58,17 @@ class Game:
         self.victory_image = pygame.image.load("Sprites/img_bg_telavitoria.png").convert()
 
     def start_game(self):
-        from player import Player
+        if pygame.joystick.get_count() < 2:
+            # Se não houver pelo menos 2 joysticks conectados, exibe a tela de notificação de erro
+            bg_telanotificacaoerro = pygame.image.load("Sprites/bg_telanotificacaoerro.png").convert()
+            self.screen.blit(bg_telanotificacaoerro, (0, 0))
+            pygame.display.flip()
+            pygame.time.delay(5000)  # Espera por 5 segundos
+            pygame.quit()
+            sys.exit()
 
+        from player import Player
+        
         self.sound_manager.play_game_music()
 
         while True:
@@ -115,6 +124,7 @@ class Game:
     def create_maze(self, screen_width, screen_height):
         # Choose a random maze from MAZE_LIST
         self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)
+        
     def create_upgrade(self):
         self.upgrade = Upgrade_Manager(MAZE_LIST[0])
 
