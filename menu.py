@@ -2,6 +2,7 @@ import pygame
 import os
 from credits import Credits
 from game import Game  # Importe a classe Game
+from sound_manager import Sound_Manager
 
 class Menu:
     def __init__(self):
@@ -39,9 +40,8 @@ class Menu:
         pygame.init()
         pygame.display.set_caption('Mazer Kombat')
 
-        menu_music_file_path = 'Sounds/Music/menumusic.wav'
-        pygame.mixer.music.load(menu_music_file_path)
-        pygame.mixer.music.play(loops=-1)
+        self.sound_manager = Sound_Manager()
+        self.sound_manager.play_menu_music()
 
         running = True
         while running:

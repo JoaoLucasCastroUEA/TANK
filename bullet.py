@@ -2,6 +2,7 @@ import pygame
 import math
 from time import time
 import os
+from sound_manager import Sound_Manager
 
 current_path = os.path.dirname(__file__)
 sprite_path = os.path.join(current_path, 'Sprites')
@@ -12,6 +13,7 @@ class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, angle, obstacles, bullet_color):
         super().__init__()
 
+        self.sound_manager = Sound_Manager()
         self.image = pygame.image.load(bullet_img_path).convert_alpha()
         self.rect = self.image.get_rect(center=(x, y))
 
