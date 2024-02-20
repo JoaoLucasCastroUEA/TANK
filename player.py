@@ -16,7 +16,7 @@ class Player:
 
         self.player_id = player_id
         self.bullet_color = color
-        self.player_life = 10
+        self.player_life = 3
         self.player_speed = 1
 
         self.joystick = joystic
@@ -124,7 +124,7 @@ class Player:
 
     def upgrade_manager(self, upgradeID):
         if upgradeID == 'END':
-            self.fire_rate = 0.5
+            self.fire_rate = 1.5
             self.player_speed = 1
             self.has_upgrade = False
 
@@ -145,3 +145,4 @@ class Player:
             # Chama o método draw da instância de Gun
             self.gun.draw(self.screen)
             self.fire_rate_final_time = time()
+

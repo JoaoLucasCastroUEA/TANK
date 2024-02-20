@@ -90,6 +90,7 @@ class Game:
             pygame.display.flip()
             self.clock.tick(1000)
 
+
     def create_maze(self, screen_width, screen_height):  # Adicionamos os argumentos de largura e altura da tela
         self.maze = Maze(MAZE_LIST[0], screen_width, screen_height)
 
