@@ -1,3 +1,4 @@
+#Teste sem bug
 import pygame
 import sys
 from maze import Maze
