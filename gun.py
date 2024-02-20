@@ -1,11 +1,12 @@
 import pygame
 import math
 from bullet import Bullet
-
+from sound_manager import Sound_Manager
 class Gun(pygame.sprite.Sprite):
     def __init__(self, player,obstacles, joystick,bullet_color):
         super().__init__()
 
+        self.sound_manager = Sound_Manager()
         self.player = player
         self.orbit_radius = 35
         self.orbit_height = 0
@@ -62,6 +63,7 @@ class Gun(pygame.sprite.Sprite):
         self.bullets.update()
 
     def fire_bullet(self):
+        self.sound_manager.play_shoot_sfx()
         bullet = Bullet(self.rect.centerx, self.rect.centery, self.angle,self.obstacles,self.bullet_color)
         self.bullets.add(bullet)
 

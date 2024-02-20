@@ -8,7 +8,7 @@ class Sound_Manager:
     def __init__(self):
         self.music_file = 'Sounds/Music/gamemusic.wav'
         self.menu_music_file = 'Sounds/Music/menumusic.wav'
-        self.hitsound_file = 'Sounds/Game/hit1.wav'
+        self.shoot_sound_file = 'Sounds/Game/shot1.wav'
 
     def play_game_music(self):
         pygame.mixer.music.load(self.music_file)
@@ -19,3 +19,6 @@ class Sound_Manager:
         pygame.mixer.music.load(self.menu_music_file)
         pygame.mixer.music.play(loops=-1)
 
+    def play_shoot_sfx(self):
+        shoot_sound = pygame.mixer.Sound(self.shoot_sound_file)
+        shoot_sound.play()
