@@ -36,11 +36,11 @@ class Game:
         self.players = []
 
         if pygame.joystick.get_count() == 1:
-            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1)
+            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1, x= 100, y =200)
             self.players.append(self.player1)
         elif pygame.joystick.get_count() == 2:
-            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1)
-            self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2)
+            self.player1 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(0), (0, 255, 0), player_id=1,  x= 100, y =200)
+            self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2, x = 1100, y = 200)
             self.players.extend([self.player1, self.player2])
 
     def start_game(self):

@@ -4,7 +4,7 @@ from gun import Gun  # Importando a classe Gun do arquivo gun.py no diretório e
 import os
 
 class Player:
-    def __init__(self, screen, obstacles, joystic, color, player_id):
+    def __init__(self, screen, obstacles, joystic, color, player_id, x, y):
         self.screen = screen
         self.width = 30
         self.height = 60
@@ -56,6 +56,9 @@ class Player:
             # Se o jogador_id for inválido, carrega uma imagem padrão
             self.image = pygame.Surface((self.width, self.height))
             self.image.fill(self.color)
+        self.rect.x = x
+        self.rect.y = y
+        print(self.rect.x,self.rect.y)
 
 
     def shoot(self):
