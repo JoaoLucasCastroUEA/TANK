@@ -51,7 +51,7 @@ class Game:
             self.player2 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(1), (0, 0, 255), player_id=2,
                                   x=1100, y=200)
             self.player3 = Player(self.screen, self.maze.walls, pygame.joystick.Joystick(2), (255, 0, 0), player_id=3,
-                                  x=640, y=360)
+                                  x=640, y=550)
             self.players.extend([self.player1, self.player2, self.player3])
 
         # Load the victory screen image
