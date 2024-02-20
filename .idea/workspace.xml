@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a03d703d-7c1c-41e3-b2d8-8cb4690f0f75" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gun.py" beforeDir="false" afterPath="$PROJECT_DIR$/gun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +90,8 @@
       <workItem from="1708452894352" duration="3339000" />
       <workItem from="1708459579408" duration="1812000" />
       <workItem from="1708462620489" duration="978000" />
-      <workItem from="1708463725250" duration="1448000" />
+      <workItem from="1708463725250" duration="1674000" />
+      <workItem from="1708465710823" duration="347000" />
     </task>
     <servers />
   </component>
@@ -100,6 +100,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TANK_pygame$player.coverage" NAME="player Coverage Results" MODIFIED="1708452958097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TANK_pygame$main.coverage" NAME="main Coverage Results" MODIFIED="1708465205622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TANK_pygame$main.coverage" NAME="main Coverage Results" MODIFIED="1708466058366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

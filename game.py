@@ -68,7 +68,7 @@ class Game:
             sys.exit()
 
         from player import Player
-        
+
         self.sound_manager.play_game_music()
 
         while True:
@@ -89,27 +89,23 @@ class Game:
                 player.draw()
 
                 # Check for collisions between current player's bullets and other players
-                for player in self.players:
-                    player.Upgrade(self.upgrade, self.upgrade.upgrade_block)
-                    player.draw()
+                for other_player in self.players:
+                    if other_player.player_id != player.player_id and player.player_life > 0:
+                        collisions = pygame.sprite.spritecollide(player, other_player.gun.bullets, True)
+                        for bullet in collisions:
+                            print(f"Player {player.player_id} hit by Player {other_player.player_id}'s bullet!")
+                            player.player_life -= 1
+                            print(f"Player {other_player.player_id} life = {other_player.player_life}")
 
-                    # Check for collisions between current player's bullets and other players
-                    for other_player in self.players:
-                        if other_player.player_id != player.player_id and player.player_life > 0:
-                            collisions = pygame.sprite.spritecollide(player, other_player.gun.bullets, True)
-                            for bullet in collisions:
-                                print(f"Player {player.player_id} hit by Player {other_player.player_id}'s bullet!")
-                                player.player_life -= 1
-                                print(f"Player {other_player.player_id} life = {other_player.player_life}")
+                for other_player in self.players:
+                    if other_player.player_id != player.player_id and player.player_life > 0:
+                        # Player-to-Player Bullet Collision
+                        collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True,
+                                                                True)
+                        for bullet in collisions:
+                            print(
+                                f"Bullet collision between Player {player.player_id} and Player {other_player.player_id}!")
 
-                    for other_player in self.players:
-                        if other_player.player_id != player.player_id and player.player_life > 0:
-                            # Player-to-Player Bullet Collision
-                            collisions = pygame.sprite.groupcollide(player.gun.bullets, other_player.gun.bullets, True,
-                                                                    True)
-                            for bullet in collisions:
-                                print(
-                                    f"Bullet collision between Player {player.player_id} and Player {other_player.player_id}!")
             self.maze.draw(self.screen)
             self.upgrade.draw(self.screen)
 
@@ -117,7 +113,9 @@ class Game:
             self.clock.tick(1000)
 
             # Check if any player's life is zero
-            if any(player.player_life <= 0 for player in self.players):
+            dead_players = [player for player in self.players if player.player_life <= 0]
+            print(dead_players, 'deadplayers')
+            if len(dead_players) == len(self.players) - 1:
                 self.display_victory_screen()
                 break
 
