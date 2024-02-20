@@ -77,6 +77,10 @@ class Player:
         self.dx = 0
         self.dy = 0
 
+        # Normalizar o vetor de movimento na diagonal
+        if self.dx != 0 and self.dy != 0:
+            self.dx /= 1.414  # Aproximadamente 1.414 é a raiz quadrada de 2
+            self.dy /= 1.414
 
         self.analaog_x = self.joystick.get_axis(0)
         self.dx = self.analaog_x
@@ -91,10 +95,7 @@ class Player:
         self.upgrade_collision(upgradeID,upgrades)
 
 
-        # Normalizar o vetor de movimento na diagonal
-        if self.dx != 0 and self.dy != 0:
-            self.dx /= 1.414  # Aproximadamente 1.414 é a raiz quadrada de 2
-            self.dy /= 1.414
+
 
 
         if self.joystick.get_axis(5) > -1:
