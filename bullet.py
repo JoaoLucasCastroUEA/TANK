@@ -1,13 +1,18 @@
 import pygame
 import math
 from time import time
+import os
+
+current_path = os.path.dirname(__file__)
+sprite_path = os.path.join(current_path, 'Sprites')
+bullet_img_path = os.path.join(sprite_path, 'img_bullet.png')
+
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, angle, obstacles, bullet_color):
         super().__init__()
 
-        self.image = pygame.Surface((10, 10))
-        self.image.fill(bullet_color)
+        self.image = pygame.image.load(bullet_img_path).convert_alpha()
         self.rect = self.image.get_rect(center=(x, y))
 
         self.speed = 1.6
@@ -19,7 +24,6 @@ class Bullet(pygame.sprite.Sprite):
 
         self.initial_time = time()
         self.final_time = time()
-
 
     def update(self):
         self.final_time = time()
